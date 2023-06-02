@@ -1,0 +1,6 @@
+{
+    "scripts": {
+        "master": "tsc -p ./master && node ./master",
+        "local": "tsc -p ./local && node ./local"
+    }
+}

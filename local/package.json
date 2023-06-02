@@ -1,0 +1,19 @@
+{
+  "name": "megaanticheat-local",
+  "version": "1.0.0",
+  "description": "Local client and cheater database for Team Fortress 2",
+  "main": "./build/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/megascatterbomb/MegaAntiCheat.git"
+  },
+  "author": "megascatterbomb",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/megascatterbomb/MegaAntiCheat/issues"
+  },
+  "homepage": "https://github.com/megascatterbomb/MegaAntiCheat#readme"
+}
