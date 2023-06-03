@@ -1,6 +1,6 @@
 {
     "scripts": {
-        "master": "tsc -p ./master && node ./master",
-        "local": "tsc -p ./local && node ./local"
+        "build-master": "tsc -p ./master",
+        "build-local": "tsc -p ./local"
     }
 }

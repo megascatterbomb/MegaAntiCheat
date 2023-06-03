@@ -4,17 +4,21 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        {   
-            "command": "npm run local",
-            "name": "Run Local Client",
+        {
+            "type": "node",
             "request": "launch",
-            "type": "node-terminal"
-        },
-        {   
-            "command": "npm run master",
             "name": "Run MasterBase",
+            "program": "${workspaceFolder}/master/src/index.ts",
+            "preLaunchTask": "npm: build-master",
+            "outFiles": ["${workspaceFolder}/master/build/**/*.js"]
+        },
+        {
+            "type": "node",
             "request": "launch",
-            "type": "node-terminal"
+            "name": "Run Local Client",
+            "program": "${workspaceFolder}/local/src/index.ts",
+            "preLaunchTask": "npm: build-local",
+            "outFiles": ["${workspaceFolder}/local/build/**/*.js"]
         }
     ]
 }
