@@ -15,5 +15,12 @@
   "bugs": {
     "url": "https://github.com/megascatterbomb/MegaAntiCheat/issues"
   },
-  "homepage": "https://github.com/megascatterbomb/MegaAntiCheat#readme"
+  "homepage": "https://github.com/megascatterbomb/MegaAntiCheat#readme",
+  "devDependencies": {
+    "discordx": "^11.7.6"
+  },
+  "dependencies": {
+    "discord.js": "^14.11.0",
+    "dotenv": "^16.1.3"
+  }
 }
