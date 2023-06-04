@@ -10,6 +10,10 @@ export async function startDiscordServer() {
         ],
     });
 
+    if(!process.env.BOT_OWNER) {
+        console.warn("[WARN] BOT_OWNER not specified in environment. You won't be able to run operator-only commands.");
+    }
+
     client.once("ready", async () => {
         await client.initApplicationCommands();
     });

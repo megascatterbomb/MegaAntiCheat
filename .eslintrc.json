@@ -28,6 +28,15 @@
         "semi": [
             "warn",
             "always"
-        ]
+        ],
+        "prefer-const": [
+            "warn"
+        ],
+        "no-multiple-empty-lines": [
+            "warn",
+            {"max": 2, "maxBOF": 0, "maxEOF": 1}
+        ],
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": ["off"]
     }
 }
