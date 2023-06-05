@@ -5,20 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "node",
+            "type": "node-terminal",
             "request": "launch",
             "name": "Run MasterBase",
-            "program": "${workspaceFolder}/master/src/index.ts",
             "preLaunchTask": "npm: build-master",
-            "outFiles": ["${workspaceFolder}/master/build/**/*.js"]
+            "command": "ts-node ./master"
         },
         {
-            "type": "node",
+            "type": "node-terminal",
             "request": "launch",
             "name": "Run Local Client",
-            "program": "${workspaceFolder}/local/src/index.ts",
             "preLaunchTask": "npm: build-local",
-            "outFiles": ["${workspaceFolder}/local/build/**/*.js"]
+            "command": "ts-node ./local"
         }
     ]
 }
