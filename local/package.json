@@ -16,12 +16,10 @@
     "url": "https://github.com/megascatterbomb/MegaAntiCheat/issues"
   },
   "homepage": "https://github.com/megascatterbomb/MegaAntiCheat#readme",
-  "devDependencies": {
-    "discordx": "^11.7.6"
-  },
   "dependencies": {
     "@discordx/utilities": "^5.2.1",
     "discord.js": "^14.11.0",
+    "discordx": "^11.7.6",
     "dotenv": "^16.1.3",
     "simple-crypto-js": "^3.0.1"
   }
