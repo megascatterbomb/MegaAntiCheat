@@ -1,6 +1,7 @@
 import { IntentsBitField } from "discord.js";
 import { Client } from "discordx";
 
+// Entry point to start discord server. Only supported in headless mode.
 export async function startDiscordServer() {
     const client = new Client({
         botId: "test",
@@ -11,7 +12,7 @@ export async function startDiscordServer() {
     });
 
     if(!process.env.BOT_OWNER) {
-        console.warn("[WARN] BOT_OWNER not specified in environment. You won't be able to run operator-only commands.");
+        throw new Error("BOT_OWNER not specified in environment. Whoever hosts this needs to set BOT_OWNER to their discord account ID!");
     }
 
     client.once("ready", async () => {
@@ -23,7 +24,7 @@ export async function startDiscordServer() {
     });
 
     if(process.env.DISCORD_TOKEN === undefined) {
-        throw new Error("DISCORD_TOKEN not defined. Required for headless mode");
+        throw new Error("DISCORD_TOKEN not defined. Required for headless mode.");
     }
 
     await client.login(process.env.DISCORD_TOKEN);

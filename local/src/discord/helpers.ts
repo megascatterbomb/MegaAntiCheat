@@ -33,8 +33,3 @@ export async function downloadTextAttachments(attachments: Attachment[]): Promis
     cleanup();
     return totalStringArray;
 }
-
-// Checks account provided is a valid format, before consulting database.
-export async function getSteamUser() {
-
-}
