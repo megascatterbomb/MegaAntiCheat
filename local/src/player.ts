@@ -1,3 +1,4 @@
+import { LobbyCapture, StatusCapture } from "./regexes";
 
 export enum Team {
     Defenders,
@@ -11,41 +12,40 @@ export enum PlayerState {
 }
 
 export default class Player {
-    private uid: string;
-    private name: string;
-    private steamid32: string;
-    private steamid64: string;
-    private time: string = "";
-    private team: Team = Team.None;
-    private state: PlayerState = PlayerState.Spawning;
+    uid: string;
+    name: string;
+    steamid32: string;
+    steamid64: string;
+    time: string = "";
+    ping: number;
+    loss: number;
+    team: Team = Team.None;
+    state: PlayerState = PlayerState.Spawning;
 
-    constructor(uid: string, name: string, steamid32: string) {
-        this.uid = uid;
-        this.name = name;
-        this.steamid32 = steamid32;
-        this.steamid64 = String(steamid32To64(steamid32));
+    constructor(player: StatusCapture) {
+        this.uid = player.userid;
+        this.name = player.name;
+        this.steamid32 = player.steamid32;
+        this.steamid64 = steamid32To64(player.steamid32)!;
+        this.time = player.time;
+        this.ping = player.ping;
+        this.loss = player.loss;
+        this.state = player.state;
     }
 
-    public getUid() {
-        return this.uid;
+    public update(player: StatusCapture) {
+        if (player.steamid32 != this.steamid32) throw new Error("Wrong status entry for player");
+        this.uid = player.userid;
+        this.name = player.name;
+        this.time = player.time;
+        this.ping = player.ping;
+        this.loss = player.loss;
+        this.state = player.state;
     }
-    public getName() {
-        return this.name;
-    }
-    public getSteamid32() {
-        return this.steamid32;
-    }
-    public getSteamid64() {
-        return this.steamid64;
-    }
-    public getTime() {
-        return this.time;
-    }
-    public getTeam() {
-        return this.team;
-    }
-    public getState() {
-        return this.state;
+
+    public updateLobby(player: LobbyCapture) {
+        if (player.steamid32 != this.steamid32) throw new Error("Wrong status entry for player");
+        this.team = player.team;
     }
 }
 
