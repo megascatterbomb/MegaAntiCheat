@@ -5,7 +5,7 @@ import { botOperator } from "../guards";
 @Discord()
 export class MiscCommands {
     @Slash({ description: "Get a report on amount of users in the database", name: "stats" })
-    async regengraph(
+    async stats(
         interaction: CommandInteraction
     ): Promise<void> {
         // TODO: Get all users
