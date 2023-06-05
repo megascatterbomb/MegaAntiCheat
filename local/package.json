@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/megascatterbomb/MegaAntiCheat#readme",
   "dependencies": {
+    "@discordx/importer": "^1.2.2",
     "@discordx/utilities": "^5.2.1",
     "discord.js": "^14.11.0",
     "discordx": "^11.7.6",
