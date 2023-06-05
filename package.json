@@ -1,7 +1,7 @@
 {
     "scripts": {
-        "build-master": "tsc -p ./master",
-        "build-local": "tsc -p ./local",
+        "build-master": "rm -rf ./master/build && tsc -p ./master",
+        "build-local": "rm -rf ./local/build && tsc -p ./local",
         "lint": "eslint . --ext .ts"
     },
     "devDependencies": {

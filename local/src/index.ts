@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
-import { startDiscordServer } from "./discord/client";
+//import { startDiscordServer } from "./discord/client";
+import {startDiscordServer} from "./discord/main";
 
 console.log("--- MegaAntiCheat Local Client ---");
 

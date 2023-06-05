@@ -6,8 +6,8 @@ import { SteamIDTransformer } from "../transformers";
 
 @Discord()
 export class MarkCommands {
-    @Slash({ description: "Import a list of cheaters/bots/sus users to the database", name: "import" })
-    async import(
+    @Slash({ description: "Import a list of cheaters/bots/sus users to the database", name: "mark" })
+    async mark(
         @SlashChoice({name: "Cheater", value: "cheater"})
         @SlashChoice({name: "Bot", value: "bot"})
         @SlashChoice({name: "Suspicious", value: "suspicious"})
