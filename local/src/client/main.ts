@@ -61,5 +61,3 @@ export async function runClient() {
         await delay(10000);
     }
 }
-
-runClient();
