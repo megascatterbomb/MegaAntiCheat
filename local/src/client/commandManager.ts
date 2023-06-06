@@ -1,5 +1,5 @@
-import Rcon, { RconConfig, State } from 'rcon-ts';
-import OS from 'os';
+import Rcon, { RconConfig, State } from "rcon-ts";
+import OS from "os";
 
 export enum KickReason {
     None = "other",

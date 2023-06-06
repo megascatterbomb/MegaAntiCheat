@@ -1,3 +1,4 @@
+import { SteamID } from "../common/steamID";
 import { LobbyCapture, StatusCapture } from "./regexes";
 
 export enum Team {
@@ -14,8 +15,7 @@ export enum PlayerState {
 export default class Player {
     uid: string;
     name: string;
-    steamid32: string;
-    steamid64: string;
+    steamid: SteamID;
     time: string = "";
     ping: number;
     loss: number;
@@ -25,8 +25,7 @@ export default class Player {
     constructor(player: StatusCapture) {
         this.uid = player.userid;
         this.name = player.name;
-        this.steamid32 = player.steamid32;
-        this.steamid64 = steamid32To64(player.steamid32)!;
+        this.steamid = player.steamid; 
         this.time = player.time;
         this.ping = player.ping;
         this.loss = player.loss;
@@ -34,7 +33,7 @@ export default class Player {
     }
 
     public update(player: StatusCapture) {
-        if (player.steamid32 != this.steamid32) throw new Error("Wrong status entry for player");
+        if (player.steamid !== this.steamid) throw new Error("Wrong status entry for player");
         this.uid = player.userid;
         this.name = player.name;
         this.time = player.time;
@@ -44,20 +43,7 @@ export default class Player {
     }
 
     public updateLobby(player: LobbyCapture) {
-        if (player.steamid32 != this.steamid32) throw new Error("Wrong status entry for player");
+        if (player.steamid !== this.steamid) throw new Error("Wrong status entry for player");
         this.team = player.team;
     }
-}
-
-export function steamid32To64(steamid32: string): string | null {
-    let segments = steamid32.split(":");
-    if (segments.length != 3) return null;
-
-    let id32 = BigInt(segments[2]);
-    return String(id32 + BigInt("76561197960265728"));
-}
-
-export function steamid64To32(steamid64: string): string {
-    let id64 = BigInt(steamid64);
-    return "U:1:" + (id64 - BigInt("76561197960265728"));
 }

@@ -1,11 +1,10 @@
-import CommandManager from "./commandManager";
-import LogWatcher from "./logWatcher";
+import { SteamID } from "../common/steamID";
 import Player from "./player";
 import { ChatCapture, KillCapture, LobbyCapture, StatusCapture, matchChat, matchKill, matchLobby, matchStatus } from "./regexes";
 
 
 export default class Server {
-    private players: Map<string, Player>;
+    private players: Map<SteamID, Player>;
     private chat: ChatCapture[] = [];
     private kills: KillCapture[] = [];
 
@@ -17,12 +16,12 @@ export default class Server {
         return this.players;
     }
 
-    public getPlayer(steamid32: string): Player | undefined {
-        return this.players.get(steamid32);
+    public getPlayer(steamid: SteamID): Player | undefined {
+        return this.players.get(steamid);
     }
 
-    public setPlayer(steamid32: string, player: Player) {
-        this.players.set(steamid32, player);
+    public setPlayer(steamid: SteamID, player: Player) {
+        this.players.set(steamid, player);
     }
 
     public getChat(): ChatCapture[] {
@@ -33,93 +32,54 @@ export default class Server {
         return this.kills;
     }
 
-    public registerLogWatcher(logwatcher: LogWatcher) {
-        logwatcher.setHandler(this.handleConsoleLine);
+    public handleLobby(lobby: LobbyCapture) {
+        let player = this.players.get(lobby.steamid);
+        if (player === undefined) return;
+        player.updateLobby(lobby);
+        console.log("Lobby: " + JSON.stringify(lobby));
     }
 
-    public registerCommandManager(commandManager: CommandManager) {
-        commandManager.setHandler(this.handleCommandRespose);
-    }
-
-    private updatePlayerStatus(status: StatusCapture) {
-        let player = this.players.get(status.steamid32);
+    public handleStatus(status: StatusCapture) {
+        let player = this.players.get(status.steamid);
         if (player === undefined) {
             player = new Player(status);
-            this.players.set(status.steamid32, player);
+            this.players.set(status.steamid, player);
         } else {
             player.update(status);
         }
+        console.log("Status: " + JSON.stringify(status));
     }
 
-    private updatePlayerLobby(lobby: LobbyCapture) {
-        let player = this.players.get(lobby.steamid32);
-        if (player === undefined) return;
-        player.updateLobby(lobby);
-    }
-
-    private handleConsoleLine(line: string) {
-        let statusMatch = matchStatus(line);
-        if (statusMatch !== null) {
-            this.handleStatus(statusMatch);
-            return;
-        }
-
-        let killMatch = matchKill(line);
-        if (killMatch !== null) {
-            this.handleKill(killMatch);
-            return;
-        }
-
-        let chatMatch = matchChat(line);
-        if (chatMatch !== null) {
-            this.handleChat(chatMatch);
-            return;
-        }
-    }
-
-    private handleCommandRespose(line: string) {
-        let match = matchLobby(line);
-        if (match === null) return;
-
-        this.updatePlayerLobby(match);
-        console.log("Lobby: " + JSON.stringify(line));
-    }
-
-    private handleStatus(cap: StatusCapture) {
-        this.updatePlayerStatus(cap);
-        console.log("Status: " + JSON.stringify(cap));
-    }
-
-    private handleChat(cap: ChatCapture) {
+    public handleChat(chat: ChatCapture) {
         // Fetch steamid if player is present
         for (let p of this.players.values()) {
-            if (p.name === cap.playerName) {
-                cap.steamid32 = p.steamid32;
+            if (p.name === chat.playerName) {
+                chat.steamid = p.steamid;
                 break;
             }
         }
 
-        this.chat.push(cap);
-        console.log("Chat: " + JSON.stringify(cap));
+        this.chat.push(chat);
+        console.log("Chat: " + JSON.stringify(chat));
     }
 
-    private handleKill(cap: KillCapture) {
+    public handleKill(kill: KillCapture) {
         // Fetch steamid if player is present
         for (let p of this.players.values()) {
-            if (p.name === cap.victimName) {
-                cap.victimSteamid = p.steamid32;
+            if (p.name === kill.victimName) {
+                kill.victimSteamid = p.steamid;
                 break;
             }
         }
         for (let p of this.players.values()) {
-            if (p.name === cap.killerName) {
-                cap.killerSteamid = p.steamid32;
+            if (p.name === kill.killerName) {
+                kill.killerSteamid = p.steamid;
                 break;
             }
         }
 
-        this.kills.push(cap);
-        console.log("Kill: " + JSON.stringify(cap));
+        this.kills.push(kill);
+        console.log("Kill: " + JSON.stringify(kill));
     }
 }
 

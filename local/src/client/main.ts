@@ -1,35 +1,59 @@
-#!/usr/bin/env node
-import yargs from 'yargs';
-import LogWatcher from './logWatcher';
-import CommandManager, { KickReason } from "./commandManager";
-import Server from './server';
+import LogWatcher from "./logWatcher";
+import CommandManager from "./commandManager";
+import Server from "./server";
+import { matchStatus, matchKill, matchChat, matchLobby } from "./regexes";
+import { logPath, rconPort, rconPwd } from "..";
 
-const argv = yargs(process.argv.slice(2)).options({
-    noLocalDB: { type: 'boolean', default: false }, // Don't start a local database
-    remote:     { type: 'string' }, // Remote database to connect to
-    
-    headless:   { type: 'boolean', default: false }, // Don't run the companion client, just start and host a local database
-    dbPort:    { type: 'number',  default: 8009 }, // Port to host local database on (subject to change)
-    webPort:   { type: 'number',  default: 8008 }, // Port to host the web server on (subject to change)
+const server = new Server();
 
-    rconPort:  { type: 'number',  default: 27015 }, // Rcon port for TF2
-    rconPwd:   { type: 'string',  default: "tf2bk" }, // Rcon password (set in TF2's autoexec.cfg file) (subject to change, just set to this for testing)
-}).parseSync();
+function handleConsoleLine(line: string) {
+    if (server === null) return;
 
+    const statusMatch = matchStatus(line);
+    if (statusMatch !== null) {
+        server.handleStatus(statusMatch);
+        return;
+    }
 
+    const killMatch = matchKill(line);
+    if (killMatch !== null) {
+        server.handleKill(killMatch);
+        return;
+    }
+
+    const chatMatch = matchChat(line);
+    if (chatMatch !== null) {
+        server.handleChat(chatMatch);
+        return;
+    }
+}
+
+function handleCommandRespose(line: string) {
+    if (server === null) return;
+
+    const match = matchLobby(line);
+    if (match === null) return;
+
+    server.handleLobby(match);
+}
 
 const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
-async function main() {
+export async function runClient() {
+    if (logPath === undefined) {
+        throw new Error("Log file path not defined. (LOG_PATH env var)");
+    }
+    if (rconPwd === undefined) {
+        throw new Error("Rcon Password not defined. (RCON_PWD env var)");
+    }
 
-    let watcher = new LogWatcher();
-    watcher.setFilePath("/home/ethan/.steam/steam/steamapps/common/Team Fortress 2/tf/console.log");
+    const watcher = new LogWatcher();
+    watcher.setFilePath(logPath);
+    watcher.setHandler(handleConsoleLine);
 
-    let cmd = new CommandManager(argv.rconPort, argv.rconPwd);
+    const cmd = new CommandManager(rconPort, rconPwd);
+    cmd.setHandler(handleCommandRespose);
 
-    let server = new Server();
-    server.registerLogWatcher(watcher);
-    server.registerCommandManager(cmd);
-
+    // eslint-disable-next-line no-constant-condition
     while(true) {
         await cmd.runStatus();
         await cmd.runLobby();
@@ -38,4 +62,4 @@ async function main() {
     }
 }
 
-main();
+runClient();

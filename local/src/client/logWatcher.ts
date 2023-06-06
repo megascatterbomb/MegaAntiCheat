@@ -1,5 +1,5 @@
-import * as fs from 'fs';
-import OS from 'os';
+import * as fs from "fs";
+import OS from "os";
 
 export default class LogWatcher {
     private logFilePath: string;
@@ -29,7 +29,7 @@ export default class LogWatcher {
             this.logFileDescriptor = null;
             return;
         }
-        this.logFileDescriptor = fs.openSync(this.logFilePath, 'r');
+        this.logFileDescriptor = fs.openSync(this.logFilePath, "r");
 
         // Watch file
         this.logFileWatcher = fs.watchFile(this.logFilePath, { interval: 100 }, (curr, prev) => {
@@ -43,13 +43,13 @@ export default class LogWatcher {
             let sizeDiff = curr.size - prev.size;
             if (sizeDiff < 0) {
                 fs.close(this.logFileDescriptor);
-                this.logFileDescriptor = fs.openSync(this.logFilePath, 'r');
+                this.logFileDescriptor = fs.openSync(this.logFilePath, "r");
                 sizeDiff = curr.size;
                 start = 0;
             }
 
-            let buffer = Buffer.alloc(sizeDiff);
-            let read = fs.readSync(this.logFileDescriptor, buffer, 0, sizeDiff, start);
+            const buffer = Buffer.alloc(sizeDiff);
+            const read = fs.readSync(this.logFileDescriptor, buffer, 0, sizeDiff, start);
 
             if (this.newLineHandler != null) {
                 buffer.toString().split(OS.EOL).forEach(this.newLineHandler);
