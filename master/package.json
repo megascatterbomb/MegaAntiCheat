@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/megascatterbomb/MegaAntiCheat/issues"
   },
-  "homepage": "https://github.com/megascatterbomb/MegaAntiCheat#readme"
+  "homepage": "https://github.com/megascatterbomb/MegaAntiCheat#readme",
+  "dependencies": {
+    "megaanticheat": "file:.."
+  }
 }
