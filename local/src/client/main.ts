@@ -18,7 +18,7 @@ const argv = yargs(process.argv.slice(2)).options({
 
 
 
-
+const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
 async function main() {
 
     let watcher = new LogWatcher();
@@ -30,7 +30,12 @@ async function main() {
     server.registerLogWatcher(watcher);
     server.registerCommandManager(cmd);
 
-    await cmd.runLobby();
+    while(true) {
+        await cmd.runStatus();
+        await cmd.runLobby();
+
+        await delay(10000);
+    }
 }
 
 main();
