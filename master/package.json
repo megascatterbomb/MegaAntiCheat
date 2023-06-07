@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/megascatterbomb/MegaAntiCheat#readme",
   "dependencies": {
-    "megaanticheat": "file:.."
+    "megaanticheat": "file:..",
+    "mcd-demo-parser": "file:demo-parser/pkg"
   }
 }
