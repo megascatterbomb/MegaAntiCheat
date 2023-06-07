@@ -1,3 +1,4 @@
+import verboseLog from "../common/logging";
 import { SteamID } from "../common/steamID";
 import Player from "./player";
 import { ChatCapture, KillCapture, LobbyCapture, StatusCapture, matchChat, matchKill, matchLobby, matchStatus } from "./regexes";
@@ -36,7 +37,7 @@ export default class Server {
         let player = this.players.get(lobby.steamid);
         if (player === undefined) return;
         player.updateLobby(lobby);
-        console.log("Lobby: " + JSON.stringify(lobby));
+        verboseLog("Lobby: " + JSON.stringify(lobby));
     }
 
     public handleStatus(status: StatusCapture) {
@@ -47,7 +48,7 @@ export default class Server {
         } else {
             player.update(status);
         }
-        console.log("Status: " + JSON.stringify(status));
+        verboseLog("Status: " + JSON.stringify(status));
     }
 
     public handleChat(chat: ChatCapture) {
@@ -60,7 +61,7 @@ export default class Server {
         }
 
         this.chat.push(chat);
-        console.log("Chat: " + JSON.stringify(chat));
+        verboseLog("Chat: " + JSON.stringify(chat));
     }
 
     public handleKill(kill: KillCapture) {
@@ -79,7 +80,7 @@ export default class Server {
         }
 
         this.kills.push(kill);
-        console.log("Kill: " + JSON.stringify(kill));
+        verboseLog("Kill: " + JSON.stringify(kill));
     }
 }
 
