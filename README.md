@@ -5,8 +5,8 @@ This project is still in development and is NOT released. Details provided below
 ## Table of Contents
 
 - [About](#about)
-- [Features](#overview-of-features)
-- [Terminology](#terminology-and-details)
+- [Overview of Features](#overview-of-features)
+- [Terminology and Details](#terminology-and-details)
 - [Installation](#installation)
 - [License](#license)
 
