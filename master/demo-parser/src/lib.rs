@@ -1,18 +1,18 @@
 mod utils;
 
-use std::convert::TryFrom;
-use wasm_bindgen::prelude::*;
-use tsify::Tsify;
 use bitbuffer::BitRead;
-use serde::{Serialize, Serializer, Deserialize};
 use serde::ser::SerializeStruct;
+use serde::{Deserialize, Serialize, Serializer};
+use std::convert::TryFrom;
 use tf_demo_parser::demo::data::DemoTick;
-pub use tf_demo_parser::{Demo, DemoParser, Parse, ParseError, ParserState, Stream};
 use tf_demo_parser::demo::header::Header;
 use tf_demo_parser::demo::parser::gamestateanalyser::{GameState, GameStateAnalyser, Hurt};
 use tf_demo_parser::demo::vector::Vector;
+pub use tf_demo_parser::{Demo, DemoParser, Parse, ParseError, ParserState, Stream};
+use tsify::Tsify;
+use wasm_bindgen::prelude::*;
 
-#[derive(Tsify, Deserialize)]
+#[derive(Tsify, Deserialize, Clone, PartialEq)]
 #[tsify(into_wasm_abi, from_wasm_abi)]
 struct ViewAngles {
     pitch: f32,
@@ -25,8 +25,11 @@ impl ViewAngles {
     }
 }
 
-impl Serialize for ViewAngles{
-    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error> where S: Serializer {
+impl Serialize for ViewAngles {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: Serializer,
+    {
         let mut s = serializer.serialize_struct("ViewAngles", 2)?;
         s.serialize_field("pitch", &self.pitch)?;
         s.serialize_field("yaw", &self.yaw)?;
@@ -34,7 +37,7 @@ impl Serialize for ViewAngles{
     }
 }
 
-#[derive(Tsify,Serialize, Deserialize,BitRead)]
+#[derive(Tsify, Serialize, Deserialize, BitRead)]
 #[tsify(into_wasm_abi, from_wasm_abi)]
 pub struct WrappedHeader {
     #[size = 8]
@@ -55,7 +58,7 @@ pub struct WrappedHeader {
     pub signon: u32,
 }
 
-impl From<Header> for WrappedHeader{
+impl From<Header> for WrappedHeader {
     fn from(value: Header) -> Self {
         WrappedHeader {
             demo_type: value.demo_type,
@@ -73,7 +76,7 @@ impl From<Header> for WrappedHeader{
     }
 }
 
-#[derive(Tsify, Deserialize, Serialize)]
+#[derive(Tsify, Deserialize, Serialize, Clone, PartialEq)]
 #[tsify(into_wasm_abi, from_wasm_abi)]
 pub struct WrappedDemoTick(u32);
 
@@ -86,11 +89,14 @@ impl From<DemoTick> for WrappedDemoTick {
 #[derive(Tsify, Deserialize)]
 #[tsify(into_wasm_abi, from_wasm_abi)]
 pub struct McdOutputFile {
-    info: WrappedHeader,
-    ticks: Vec<McdTick>
+    pub info: WrappedHeader,
+    ticks: Vec<McdTick>,
 }
 impl Serialize for McdOutputFile {
-    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error> where S: Serializer {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: Serializer,
+    {
         let mut s = serializer.serialize_struct("McdOutputFile", 2)?;
         s.serialize_field("info", &self.info)?;
         s.serialize_field("ticks", &self.ticks)?;
@@ -113,13 +119,14 @@ impl McdOutputFile {
                 ticks: 0,
                 frames: 0,
                 signon: 0,
-            }).unwrap(),
+            })
+            .unwrap(),
             ticks: Vec::new(),
         }
     }
 }
 
-#[derive(Tsify, Deserialize, Serialize)]
+#[derive(Tsify, Deserialize, Serialize, Clone, PartialEq)]
 #[tsify(into_wasm_abi, from_wasm_abi)]
 struct WrappedVector {
     x: f32,
@@ -137,7 +144,7 @@ impl From<Vector> for WrappedVector {
     }
 }
 
-#[derive(Tsify, Deserialize)]
+#[derive(Tsify, Deserialize, Clone, PartialEq)]
 #[tsify(into_wasm_abi, from_wasm_abi)]
 struct PlayerTickInfo {
     player: String,
@@ -146,7 +153,10 @@ struct PlayerTickInfo {
 }
 
 impl Serialize for PlayerTickInfo {
-    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error> where S: Serializer {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: Serializer,
+    {
         let mut s = serializer.serialize_struct("PlayerTickInfo", 3)?;
         s.serialize_field("player", &self.player)?;
         s.serialize_field("view_angles", &self.view_angles)?;
@@ -155,7 +165,7 @@ impl Serialize for PlayerTickInfo {
     }
 }
 
-#[derive(Tsify, Deserialize, Serialize)]
+#[derive(Tsify, Deserialize, Serialize, Clone, PartialEq)]
 #[tsify(into_wasm_abi, from_wasm_abi)]
 struct WrappedHurt {
     tick: WrappedDemoTick,
@@ -172,7 +182,7 @@ struct WrappedHurt {
     bonus_effect: u8,
 }
 
-impl From<Hurt> for WrappedHurt{
+impl From<Hurt> for WrappedHurt {
     fn from(value: Hurt) -> Self {
         WrappedHurt {
             tick: WrappedDemoTick::try_from(value.tick).unwrap(),
@@ -191,16 +201,29 @@ impl From<Hurt> for WrappedHurt{
     }
 }
 
-#[derive(Tsify, Deserialize)]
+#[derive(Tsify, Deserialize, Clone, PartialEq)]
 #[tsify(into_wasm_abi, from_wasm_abi)]
 struct McdTick {
     tick: WrappedDemoTick,
     players: Vec<PlayerTickInfo>,
-    hurts: Vec<WrappedHurt>
+    hurts: Vec<WrappedHurt>,
+}
+
+impl Default for McdTick {
+    fn default() -> Self {
+        McdTick {
+            tick: WrappedDemoTick(0),
+            players: vec![],
+            hurts: vec![],
+        }
+    }
 }
 
 impl Serialize for McdTick {
-    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error> where S: Serializer {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: Serializer,
+    {
         let mut s = serializer.serialize_struct("PlayerTickInfo", 3)?;
         s.serialize_field("players", &self.players)?;
         s.serialize_field("tick", &self.tick)?;
@@ -218,14 +241,20 @@ pub fn parse_demo(file: Vec<u8>) -> McdOutputFile {
 
     //let file = fs::read(&path).unwrap();
     let demo = Demo::owned(file);
-    let (header, mut ticker) = DemoParser::new_all_with_analyser(demo.get_stream(), GameStateAnalyser::new()).ticker().unwrap();
+    let (header, mut ticker) =
+        DemoParser::new_all_with_analyser(demo.get_stream(), GameStateAnalyser::new())
+            .ticker()
+            .unwrap();
 
     output.info = WrappedHeader::try_from(header).unwrap();
+
+    let mut output_tick = McdTick::default();
 
     loop {
         match ticker.tick() {
             Ok(true) => {
-                output.ticks.push(handle_tick(ticker.state()));
+                handle_tick(ticker.state(), &mut output_tick);
+                output.ticks.push(std::mem::take(&mut output_tick));
                 continue;
             }
             Ok(false) => {
@@ -238,27 +267,21 @@ pub fn parse_demo(file: Vec<u8>) -> McdOutputFile {
         }
     }
 
+    output.ticks.dedup();
+
     output
 }
 
-fn handle_tick(tick: &GameState) -> McdTick {
-    let mut output_tick = McdTick {
-        tick: WrappedDemoTick::try_from(tick.tick).unwrap(),
-        players: Vec::new(),
-        hurts: Vec::new(),
-    };
+fn handle_tick(tick: &GameState, output_tick: &mut McdTick) {
+    output_tick.tick = WrappedDemoTick::from(tick.tick);
     tick.players.iter().for_each(|player| {
-        let player_info = player.info.as_ref().unwrap();
         output_tick.players.push(PlayerTickInfo {
-            player: player_info.steam_id.clone(),
+            player: player.info.as_ref().unwrap().steam_id.clone(),
             view_angles: ViewAngles::new(player.pitch_angle, player.view_angle),
             position: WrappedVector::try_from(player.position).unwrap(),
         });
     });
 
-    for x in tick.hurts.iter() {
-        output_tick.hurts.push(WrappedHurt::try_from(x.clone()).unwrap());
-    }
-
-    output_tick
+    //todo: figure out how to do this in a non memory-intensive way
+    //output_tick.hurts.extend(tick.hurts.clone().into_iter().flat_map(WrappedHurt::try_from));
 }
