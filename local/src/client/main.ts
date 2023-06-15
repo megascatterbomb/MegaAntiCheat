@@ -7,32 +7,32 @@ import { logPath, rconPort, rconPwd } from "..";
 const server = new Server();
 
 function handleConsoleLine(line: string) {
-    if (server === null) return;
+    if (!server) return;
 
     const statusMatch = matchStatus(line);
-    if (statusMatch !== null) {
+    if (statusMatch) {
         server.handleStatus(statusMatch);
         return;
     }
 
     const killMatch = matchKill(line);
-    if (killMatch !== null) {
+    if (killMatch) {
         server.handleKill(killMatch);
         return;
     }
 
     const chatMatch = matchChat(line);
-    if (chatMatch !== null) {
+    if (chatMatch) {
         server.handleChat(chatMatch);
         return;
     }
 }
 
-function handleCommandRespose(line: string) {
-    if (server === null) return;
+function handleCommandResponse(line: string) {
+    if (!server) return;
 
     const match = matchLobby(line);
-    if (match === null) return;
+    if (!match) return;
 
     server.handleLobby(match);
 }
@@ -51,7 +51,7 @@ export async function runClient() {
     watcher.setHandler(handleConsoleLine);
 
     const cmd = new CommandManager(rconPort, rconPwd);
-    cmd.setHandler(handleCommandRespose);
+    cmd.setHandler(handleCommandResponse);
 
     // eslint-disable-next-line no-constant-condition
     while(true) {
