@@ -1,7 +1,7 @@
 import type { RequestHandler } from "@sveltejs/kit";
 import { Player } from "$lib";
 
-export const GET: RequestHandler = async (event) => {
+export const GET: RequestHandler = async () => {
     const players = await Player.find().exec();
 
     return new Response(JSON.stringify(players, null, 4));
