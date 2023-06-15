@@ -1,0 +1,11 @@
+{
+    "recommendations": [
+        "bradlc.vscode-tailwindcss",
+        "heybourn.headwind",
+        "svelte.svelte-vscode",
+        "fivethree.vscode-svelte-snippets",
+        "syler.sass-indented",
+        "gencer.html-slim-scss-css-class-completion",
+        "mrmlnc.vscode-scss"
+    ]
+}

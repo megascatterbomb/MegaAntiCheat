@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/megascatterbomb/MegaAntiCheat#readme",
   "dependencies": {
-    "megaanticheat": "file:.."
+    "megaanticheat": "workspace:.."
   }
 }
