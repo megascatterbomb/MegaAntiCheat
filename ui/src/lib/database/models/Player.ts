@@ -1,7 +1,7 @@
-import { Schema, model } from "mongoose";
+import { Document, Schema, model } from "mongoose";
 import { PlayerStatus } from "./PlayerStatus";
 
-export interface IPlayer {
+export interface IPlayer extends Document {
     steamId: string;
     name: string;
     aliases: string[];

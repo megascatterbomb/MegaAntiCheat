@@ -31,7 +31,7 @@
             </div>
 
             <div class="navbar-end">
-                <form class="flex items-center w-full" action="/search" method="post">
+                <form class="flex items-center w-full" action="" on:submit|preventDefault>
                     <label for="searchbar" class="sr-only">Search</label>
 
                     <div class="relative pr-4 w-full">
