@@ -13,7 +13,7 @@
 
     <div class="flex flex-col justify-center items-center mt-8">
         <p class="text-xl text-center">"{data.quote.quote}"</p>
-        
+
         <p class="text-xl text-center">- {data.quote.author}</p>
     </div>
 </div>

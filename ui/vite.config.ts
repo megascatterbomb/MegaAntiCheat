@@ -11,6 +11,7 @@ export default defineConfig({
 
     server: process.env.BEHIND_PROXY
         ? ({
+              host: "0.0.0.0",
               port: proxyPort,
 
               hmr: {

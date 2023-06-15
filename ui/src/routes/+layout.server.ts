@@ -4,10 +4,8 @@ import { client, runningSetup } from "../stores/database";
 import { setupDatabase } from "$lib";
 
 export const load: LayoutServerLoad = async ({ fetch }) => {
-    // Load the database
-    if (get(client) == null && !get(runningSetup))
-        setupDatabase();
-    
+    if (get(client) == null && !get(runningSetup)) setupDatabase();
+
     const quote = await fetch("/quote");
 
     return {

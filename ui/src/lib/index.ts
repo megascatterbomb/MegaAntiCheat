@@ -8,3 +8,5 @@ export const setupDatabase = async () => {
 
     runningSetup.set(false);
 };
+
+export * from "./database";

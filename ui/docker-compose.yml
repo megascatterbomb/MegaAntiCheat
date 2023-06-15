@@ -1,9 +1,9 @@
 version: "3"
 
 services:
-  mongo:
-    image: mongo
-    environment:
-      - MONGO_INITDB_DATABASE=megaanticheat-dev
-    ports:
-      - 27017:27017
+    mongo:
+        image: mongo
+        environment:
+            - MONGO_INITDB_DATABASE=megaanticheat-dev
+        ports:
+            - 27017:27017
