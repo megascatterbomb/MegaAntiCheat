@@ -13,7 +13,8 @@
         "fmt": "prettier --write . --plugin-search-dir=.",
         "lint": "eslint .",
         "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-        "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
+        "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+        "build:node": "SVELTE_ADAPTER=node vite build"
     },
     "repository": {
         "type": "git",
@@ -37,6 +38,7 @@
     },
     "devDependencies": {
         "@sveltejs/adapter-auto": "^2.1.0",
+        "@sveltejs/adapter-node": "^1.2.4",
         "@sveltejs/kit": "^1.20.2",
         "@types/node": "^20.2.5",
         "@typescript-eslint/eslint-plugin": "^5.59.8",

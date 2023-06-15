@@ -6,7 +6,7 @@
     export let data: PageData;
 
     const players: IPlayer[] = data.players;
-    
+
     $: checked = { _: false } as Record<string, boolean>;
     $: allChecked = Object.values(checked).every((value) => value === true);
 
@@ -60,9 +60,7 @@
 
         <tbody>
             {#each players as player}
-                <tr
-                    class="transition-all cursor-pointer hover"
-                >
+                <tr class="transition-all cursor-pointer hover">
                     <th>
                         <label>
                             <input
