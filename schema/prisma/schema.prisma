@@ -1,0 +1,22 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum PlayerStatus {
+  NORMAL
+  SUSPICIOUS
+  CHEATER
+}
+
+model Player {
+  id Int @id @default(autoincrement())
+  steamId Int @unique
+  name String
+  aliases String[]
+  status PlayerStatus
+}

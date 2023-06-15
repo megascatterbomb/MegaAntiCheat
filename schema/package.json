@@ -1,10 +1,13 @@
 {
-  "name": "mac-master",
+  "name": "mac-schema",
   "version": "1.0.0",
-  "description": "Master cheater database with AI anti-cheat for Team Fortress 2",
+  "description": "Master cheater database schema with AI anti-cheat for Team Fortress 2",
   "main": "./build/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prisma": "prisma",
+    "setup": "prisma init --datasource-provider postgresql",
+    "postinstall": "prisma generate",
+    "migrate": "prisma migrate dev --name init"
   },
   "repository": {
     "type": "git",
@@ -17,6 +20,13 @@
   },
   "homepage": "https://github.com/megascatterbomb/MegaAntiCheat#readme",
   "dependencies": {
+    "@prisma/client": "4.15.0",
     "megaanticheat": "workspace:.."
+  },
+  "devDependencies": {
+    "@types/node": "^20.2.5",
+    "prisma": "^4.15.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.3"
   }
 }

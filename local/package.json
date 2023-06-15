@@ -1,5 +1,5 @@
 {
-  "name": "megaanticheat-local",
+  "name": "mac-local",
   "version": "1.0.0",
   "description": "Local client and cheater database for Team Fortress 2",
   "main": "./build/index.js",
