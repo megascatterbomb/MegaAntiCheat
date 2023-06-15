@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Icon } from "@steeze-ui/svelte-icon";
-    import { Home } from "@steeze-ui/heroicons";
+    import { Home, Users } from "@steeze-ui/heroicons";
 </script>
 
 <div class="drawer">
@@ -12,7 +12,7 @@
                 <label for="sidebar" class="btn btn-square btn-ghost drawer-button">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        class="h-5 w-5"
+                        class="w-5 h-5"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -27,14 +27,14 @@
             </div>
 
             <div class="navbar-start">
-                <a class="btn btn-ghost normal-case text-xl" href="/">MegaAntiCheat</a>
+                <a class="text-xl normal-case btn btn-ghost" href="/">MegaAntiCheat</a>
             </div>
 
             <div class="navbar-end">
                 <button class="btn btn-ghost btn-circle">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        class="h-5 w-5"
+                        class="w-5 h-5"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -51,7 +51,7 @@
                     <div class="indicator">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            class="h-5 w-5"
+                            class="w-5 h-5"
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke="currentColor"
@@ -67,16 +67,25 @@
                 </button>
             </div>
         </div>
+
+        <slot />
     </div>
 
     <div class="drawer-side">
         <label for="sidebar" class="drawer-overlay" />
 
-        <ul class="menu p-4 w-80 h-full bg-base-200 text-base-content">
-            <li class="bg-neutral rounded-md">
+        <ul class="p-4 w-80 h-full menu bg-base-200 text-base-content">
+            <li class="mb-3 rounded-md bg-neutral">
                 <a href="/">
                     <Icon src={Home} size="18px" theme="solid" />
                     Home
+                </a>
+            </li>
+
+            <li class="mb-3 rounded-md bg-neutral">
+                <a href="/database">
+                    <Icon src={Users} size="18px" theme="solid" />
+                    Database
                 </a>
             </li>
         </ul>

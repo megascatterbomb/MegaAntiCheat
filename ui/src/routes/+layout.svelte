@@ -3,6 +3,6 @@
     import "../styles/global.scss";
 </script>
 
-<Header />
-
-<slot />
+<Header>
+    <slot />
+</Header>
