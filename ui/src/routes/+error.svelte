@@ -4,6 +4,10 @@
     export let data: PageData;
 </script>
 
+<svelte:head>
+    <title>MegaAntiCheat | Error</title>
+</svelte:head>
+
 <div class="flex flex-col justify-center items-center h-full">
     <div class="flex flex-col justify-center items-center">
         <h1 class="text-5xl font-bold text-center">404</h1>

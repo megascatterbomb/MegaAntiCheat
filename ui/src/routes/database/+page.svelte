@@ -31,6 +31,10 @@
     };
 </script>
 
+<svelte:head>
+    <title>MegaAntiCheat | Database</title>
+</svelte:head>
+
 <div class="overflow-x-auto">
     <table class="table">
         <thead>
