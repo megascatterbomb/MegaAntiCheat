@@ -80,7 +80,7 @@
                     </button>
                 </form>
 
-                <button class="btn btn-ghost btn-circle">
+                <button class="mr-4 btn btn-ghost btn-circle">
                     <div class="indicator">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
