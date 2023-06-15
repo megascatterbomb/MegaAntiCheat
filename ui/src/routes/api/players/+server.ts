@@ -26,7 +26,11 @@ export const POST: RequestHandler = async (event) => {
         status: body.status,
     });
 
-    const data = await player.save();
+    try {
+        const data = await player.save();
 
-    return new Response(JSON.stringify(data, null, 4));
+        return new Response(JSON.stringify(data, null, 4));
+    } catch (e: any) {
+        return new Response(e.message, { status: 500 });
+    }
 };
