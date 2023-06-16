@@ -1,13 +1,12 @@
 {
     "compilerOptions": {
-        "target": "es2017",
         "lib": ["dom", "dom.iterable", "esnext"],
+        "outDir": "dist",
         "allowJs": true,
         "checkJs": true,
         "skipLibCheck": true,
         "strict": true,
         "forceConsistentCasingInFileNames": true,
-        "noEmit": true,
         "esModuleInterop": true,
         "module": "esnext",
         "moduleResolution": "node",
@@ -17,10 +16,11 @@
         "incremental": true,
         "noUncheckedIndexedAccess": true,
         "baseUrl": ".",
+        "tsBuildInfoFile": ".tsbuildinfo",
         "paths": {
             "@/*": ["./src/*"]
         }
     },
-    "include": [".eslintrc.cjs", "**/*.ts", "**/*.cjs", "**/*.mjs"],
+    "include": [".eslintrc.js", "**/*.ts", "**/*.cjs", "**/*.mjs"],
     "exclude": ["node_modules"]
 }
