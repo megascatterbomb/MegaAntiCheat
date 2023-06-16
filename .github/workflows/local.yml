@@ -14,26 +14,18 @@ jobs:
         target:
           # musl-based linux
           - alpine-x64
-          - alpine-armv6
-          - alpine-armv7
           - alpine-arm64
 
           # glibc-based linux
           - linux-x64
-          - linux-armv6
-          - linux-armv7
           - linux-arm64
 
           # mach-o
           - mac-x64
-          - mac-armv6
-          - mac-armv7
           - mac-arm64
 
           # nt kernel
           - windows-x64
-          - windows-armv6
-          - windows-armv7
           - windows-arm64
     steps:
       - uses: actions/checkout@v2
@@ -72,6 +64,6 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
-          name: megaanticheat
+          name: ${{ steps.build.outputs.file }}
           path: local/build/${{ steps.build.outputs.file }}
  
