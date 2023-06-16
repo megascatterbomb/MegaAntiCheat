@@ -102,6 +102,12 @@
         };
     };
 
+    /**
+     * This is INCREDIBLY hacky!
+     * I'm sorry for this, but I don't know how to do it better.
+     * I can see like 900 billion bugs with this when tested, but
+     * I don't know how to fix it. Sorry.
+     */
     const fixShown = () => {
         shown = [];
 
