@@ -4,7 +4,9 @@
         "lint": "eslint . --ext .ts",
         "prettier": "prettier --write .",
         "prettier:lint": "prettier --check .",
-        "clean": "git clean -xdf .turbo node_modules"
+        "clean": "git clean -xdf .turbo node_modules",
+        "turbo": "turbo",
+        "build": "SKIP_ENV_VALIDATION=true turbo build"
     },
     "devDependencies": {
         "@ianvs/prettier-plugin-sort-imports": "4.0.2",

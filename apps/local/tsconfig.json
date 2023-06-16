@@ -3,6 +3,11 @@
     "compilerOptions": {
         "module": "commonjs",
         "target": "ESNext",
-        "outDir": "dist"
-    }
+        "outDir": "dist",
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["src/*"]
+        }
+    },
+    "include": ["src/**/*.ts"]
 }

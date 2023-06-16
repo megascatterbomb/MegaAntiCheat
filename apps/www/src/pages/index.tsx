@@ -1,9 +1,6 @@
-import { api } from "@/utils/api";
 import Head from "next/head";
 
 export default function Home() {
-  const hello = api.example.hello.useQuery({ text: "from tRPC" });
-
   return (
     <>
       <Head>
@@ -12,7 +9,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex min-h-screen bg-black">
-        <div>Ani cheat</div>
+        <div>Anti cheat</div>
       </main>
     </>
   );

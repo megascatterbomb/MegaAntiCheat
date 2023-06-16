@@ -7,7 +7,9 @@
     "postinstall": "prisma generate",
     "lint": "next lint",
     "start": "next start",
-    "clean": "git clean -xdf .next .turbo node_modules"
+    "clean": "git clean -xdf .next .turbo node_modules",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.5",
