@@ -5,7 +5,10 @@
     "main": "./build/index.js",
     "scripts": {
         "build": "tsup",
-        "dev": "tsup --watch"
+        "dev": "tsup --watch",
+        "lint": "dotenv -v SKIP_ENV_VALIDATION=1 next lint",
+        "lint:fix": "pnpm lint --fix",
+        "clean": "git clean -xdf dist .turbo node_modules"
     },
     "repository": {
         "type": "git",

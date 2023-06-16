@@ -15,7 +15,10 @@
     "homepage": "https://github.com/megascatterbomb/MegaAntiCheat#readme",
     "scripts": {
         "build": "tsup",
-        "dev": "tsup --watch"
+        "dev": "tsup --watch",
+        "lint": "eslint . --ext .ts",
+        "lint:fix": "eslint . --ext .ts --fix",
+        "clean": "git clean -xdf dist .turbo node_modules"
     },
     "devDependencies": {
         "tsup": "7.0.0"

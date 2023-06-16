@@ -6,7 +6,8 @@
     "dev": "next dev",
     "postinstall": "prisma generate",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "clean": "git clean -xdf .next .turbo node_modules"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.5",
