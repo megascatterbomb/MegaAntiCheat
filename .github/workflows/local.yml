@@ -13,25 +13,27 @@ jobs:
             node-version-full: 18.15.0
         target:
           # musl-based linux
-          - alpine-x86
           - alpine-x64
-          - alpine-armhf
+          - alpine-armv6
+          - alpine-armv7
           - alpine-arm64
 
           # glibc-based linux
-          - linux-x86
           - linux-x64
-          - linux-armhf
+          - linux-armv6
+          - linux-armv7
           - linux-arm64
 
           # mach-o
-          - max-x86
           - mac-x64
+          - mac-armv6
+          - mac-armv7
           - mac-arm64
 
           # nt kernel
-          - windows-x86
           - windows-x64
+          - windows-armv6
+          - windows-armv7
           - windows-arm64
     steps:
       - uses: actions/checkout@v2
@@ -48,6 +50,7 @@ jobs:
         run: pnpm install
 
       - name: Build
+        id: build
         run: |
           cd local
           pnpm build
@@ -58,7 +61,17 @@ jobs:
             EXE=""
           fi
 
+          EXECUTABLE="megaanticheat-${{ matrix.target }}-${{ matrix.node-version }}$EXE"
+
           pnpm exec pkg build/main.js -C Brotli --public-packages "*" \
-            -o build/megaanticheat-${{ matrix.target }}-${{ matrix.node-version }}$EXE \
+            -o "build/$EXECUTABLE" \
             -t ${{ matrix.node-version }}-${{ matrix.target }}
+          
+          echo "file=$EXECUTABLE" >> "$GITHUB_OUTPUT"
+      
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: megaanticheat
+          path: local/build/${{ steps.build.outputs.file }}
  
