@@ -1,4 +1,4 @@
 packages:
-  - local
-  - master
-  - ui
+    - local
+    - master
+    - ui
