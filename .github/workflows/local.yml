@@ -3,67 +3,66 @@ name: Local CLI Build
 on: [push, pull_request]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - node-version: node18
-            node-version-full: 18.15.0
-        target:
-          # musl-based linux
-          - alpine-x64
-          - alpine-arm64
+    build:
+        runs-on: ubuntu-latest
+        strategy:
+            fail-fast: false
+            matrix:
+                include:
+                    - node-version: node18
+                      node-version-full: 18.15.0
+                target:
+                    # musl-based linux
+                    - alpine-x64
+                    - alpine-arm64
 
-          # glibc-based linux
-          - linux-x64
-          - linux-arm64
+                    # glibc-based linux
+                    - linux-x64
+                    - linux-arm64
 
-          # mach-o
-          - mac-x64
-          - mac-arm64
+                    # mach-o
+                    - mac-x64
+                    - mac-arm64
 
-          # nt kernel
-          - windows-x64
-          - windows-arm64
-    steps:
-      - uses: actions/checkout@v2
-      
-      - name: Setup Node
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version-full }}
+                    # nt kernel
+                    - windows-x64
+                    - windows-arm64
+        steps:
+            - uses: actions/checkout@v2
 
-      - name: Install pnpm
-        run: npm install -g pnpm
+            - name: Setup Node
+              uses: actions/setup-node@v1
+              with:
+                  node-version: ${{ matrix.node-version-full }}
 
-      - name: Install Dependencies
-        run: pnpm install
+            - name: Install pnpm
+              run: npm install -g pnpm
 
-      - name: Build
-        id: build
-        run: |
-          cd local
-          pnpm build
-          
-          if [ "${{ matrix.target }}" = "windows-x86" ] || [ "${{ matrix.target }}" = "windows-x64" ] || [ "${{ matrix.target }}" = "windows-arm64" ]; then
-            EXE=".exe"
-          else
-            EXE=""
-          fi
+            - name: Install Dependencies
+              run: pnpm install
 
-          EXECUTABLE="megaanticheat-${{ matrix.target }}-${{ matrix.node-version }}$EXE"
+            - name: Build
+              id: build
+              run: |
+                  cd local
+                  pnpm build
 
-          pnpm exec pkg build/main.js -C Brotli --public-packages "*" \
-            -o "build/$EXECUTABLE" \
-            -t ${{ matrix.node-version }}-${{ matrix.target }}
-          
-          echo "file=$EXECUTABLE" >> "$GITHUB_OUTPUT"
-      
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: ${{ steps.build.outputs.file }}
-          path: local/build/${{ steps.build.outputs.file }}
- 
+                  if [ "${{ matrix.target }}" = "windows-x86" ] || [ "${{ matrix.target }}" = "windows-x64" ] || [ "${{ matrix.target }}" = "windows-arm64" ]; then
+                    EXE=".exe"
+                  else
+                    EXE=""
+                  fi
+
+                  EXECUTABLE="megaanticheat-${{ matrix.target }}-${{ matrix.node-version }}$EXE"
+
+                  pnpm exec pkg build/main.js -C Brotli --public-packages "*" \
+                    -o "build/$EXECUTABLE" \
+                    -t ${{ matrix.node-version }}-${{ matrix.target }}
+
+                  echo "file=$EXECUTABLE" >> "$GITHUB_OUTPUT"
+
+            - name: Upload Artifact
+              uses: actions/upload-artifact@v2
+              with:
+                  name: ${{ steps.build.outputs.file }}
+                  path: local/build/${{ steps.build.outputs.file }}

@@ -4,6 +4,7 @@
         "build-master": "rm -rf ./master/build && pnpm -C master build",
         "build-local": "rm -rf ./local/build && pnpm -C local build",
         "build-ui": "rm -rf ./ui/build && pnpm -C ui build:node",
+        "build-apt": "rm -rf ./api/build && pnpm -C api build",
         "lint": "eslint . --ext .ts",
         "fmt": "prettier --write . && pnpm -C ui fmt",
         "build": "pnpm build-master && pnpm build-local && pnpm build-ui"

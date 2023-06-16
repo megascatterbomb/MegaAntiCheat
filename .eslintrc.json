@@ -12,12 +12,16 @@
     },
     "plugins": ["@typescript-eslint"],
     "rules": {
-        "indent": ["warn", 4],
-        "quotes": ["warn", "double"],
-        "semi": ["warn", "always"],
-        "prefer-const": ["warn"],
+        "indent": "off",
+        "quotes": "off",
+        "semi": "off",
         "no-multiple-empty-lines": ["warn", { "max": 2, "maxBOF": 0, "maxEOF": 1 }],
         "no-unused-vars": "off",
-        "@typescript-eslint/no-unused-vars": ["off"]
+        "@typescript-eslint/no-unused-vars": "off",
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "prefer-spread": "off",
+        "prefer-rest-params": "off",
+        "prefer-const": "off"
     }
 }

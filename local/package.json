@@ -5,7 +5,7 @@
     "main": "./build/index.js",
     "scripts": {
         "start": "ts-node src/index.ts",
-        "build": "esbuild --bundle src/index.ts --outfile=build/main.js --platform=node --target=es2022",
+        "build": "esbuild --bundle --minify --minify-whitespace --minify-identifiers --minify-syntax --sourcemap src/index.ts --outfile=build/main.js --platform=node --target=es2022",
         "pkg": "pkg"
     },
     "repository": {
