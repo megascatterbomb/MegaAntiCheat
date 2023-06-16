@@ -142,8 +142,7 @@
     };
 
     const nextPage = async () => {
-        if (page > pages)
-            return;
+        if (page > pages) return;
 
         const data = await (
             await fetch(`/api/players?page=${page + 1}`, {
@@ -161,8 +160,7 @@
     };
 
     const prevPage = async () => {
-        if (page < 0)
-            return;
+        if (page < 0) return;
 
         const data = await (
             await fetch(`/api/players?page=${page - 1}`, {
