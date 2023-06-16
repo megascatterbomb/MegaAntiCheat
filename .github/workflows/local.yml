@@ -54,7 +54,7 @@ jobs:
           else
             EXE=""
           fi
-          nexe -b -i build/main.js \
+          pnpm nexe -b -i build/main.js \
             -o build/megaanticheat-${{ matrix.target }}-${{ matrix.node-version }}-$EXE \
             -t ${{ matrix.target }}-${{ matrix.node-version }}
  
