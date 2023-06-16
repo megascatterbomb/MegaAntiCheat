@@ -44,17 +44,25 @@ jobs:
 
       - name: Install Dependencies
         run: pnpm install
+      
+      - name: Install apt packages
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gcc-multilib g++-multilib python3 g++ make python3-pip
 
       - name: Build
         run: |
           cd local
           pnpm build
+          
           if [ "${{ matrix.target }}" = "windows-x86" ] || [ "${{ matrix.target }}" = "windows-x64" ] || [ "${{ matrix.target }}" = "windows-arm64" ]; then
             EXE=".exe"
           else
             EXE=""
           fi
+
           pnpm nexe -b -i build/main.js \
             -o build/megaanticheat-${{ matrix.target }}-${{ matrix.node-version }}-$EXE \
-            -t ${{ matrix.target }}-${{ matrix.node-version }}
+            -t ${{ matrix.target }}-${{ matrix.node-version }} \
+            --verbose
  
