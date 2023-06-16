@@ -133,6 +133,7 @@
             shown.push(page + 4);
         }
 
+        // Why
         if (shown.length == 4 && page + 4 > 0) {
             shown.push(page + 5);
         }
