@@ -1,0 +1,60 @@
+name: Local CLI Build
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [18.15.0]
+        target:
+          # musl-based linux
+          - alpine-x86
+          - alpine-x64
+          - alpine-armhf
+          - alpine-arm64
+
+          # glibc-based linux
+          - linux-x86
+          - linux-x64
+          - linux-armhf
+          - linux-arm64
+
+          # mach-o
+          - max-x86
+          - mac-x64
+          - mac-arm64
+
+          # nt kernel
+          - windows-x86
+          - windows-x64
+          - windows-arm64
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install Dependencies
+        run: pnpm install
+
+      - name: Build
+        run: |
+          cd local
+          pnpm build
+          if [ "${{ matrix.target }}" = "windows-x86" ] || [ "${{ matrix.target }}" = "windows-x64" ] || [ "${{ matrix.target }}" = "windows-arm64" ]; then
+            EXE=".exe"
+          else
+            EXE=""
+          fi
+          nexe -b -i build/main.js \
+            -o build/megaanticheat-${{ matrix.target }}-${{ matrix.node-version }}-$EXE \
+            -t ${{ matrix.target }}-${{ matrix.node-version }}
+ 
