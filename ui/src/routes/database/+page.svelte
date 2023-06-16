@@ -3,12 +3,16 @@
     import { onMount } from "svelte";
     import type { PageData } from "./$types";
     import { Icon } from "@steeze-ui/svelte-icon";
-    import { Pencil, XMark } from "@steeze-ui/heroicons";
+    import { ChevronLeft, ChevronRight, Pencil, XMark } from "@steeze-ui/heroicons";
+    import { browser } from "$app/environment";
 
     export let data: PageData;
 
-    const players: IPlayer[] = data.players;
-
+    // This line is an abomination but I love it.
+    $: players = data.data.data as IPlayer[];
+    $: pages = data.data.pagination.pages;
+    $: page = data.data.pagination.page;
+    $: shown = [] as number[];
     $: checked = { _: false } as Record<string, boolean>;
     $: allChecked = Object.values(checked).every((value) => value === true);
     $: values = {} as Record<string, PlayerStatus>;
@@ -97,6 +101,96 @@
             return data;
         };
     };
+
+    const fixShown = () => {
+        shown = [];
+
+        if (page > 2) {
+            shown.push(page - 1);
+        }
+
+        if (page > 1) {
+            shown.push(page);
+        }
+
+        shown.push(page + 1);
+
+        if (page + 1 < pages) {
+            shown.push(page + 2);
+        }
+
+        if (page + 2 < pages) {
+            shown.push(page + 3);
+        }
+
+        if (shown.length == 3 && page + 3 < pages) {
+            shown.push(page + 4);
+        }
+
+        if (shown.length == 4 && page + 4 > 0) {
+            shown.push(page + 5);
+        }
+
+        shown = [...shown];
+    };
+
+    const nextPage = async () => {
+        if (page > pages)
+            return;
+
+        const data = await (
+            await fetch(`/api/players?page=${page + 1}`, {
+                method: "GET",
+            })
+        ).json();
+
+        players = data.data as IPlayer[];
+        pages = data.pagination.pages;
+        page = data.pagination.page;
+
+        fixShown();
+
+        return data;
+    };
+
+    const prevPage = async () => {
+        if (page < 0)
+            return;
+
+        const data = await (
+            await fetch(`/api/players?page=${page - 1}`, {
+                method: "GET",
+            })
+        ).json();
+
+        players = data.data as IPlayer[];
+        pages = data.pagination.pages;
+        page = data.pagination.page;
+
+        fixShown();
+
+        return data;
+    };
+
+    const goToPage = async (pageN: number) => {
+        const data = await (
+            await fetch(`/api/players?page=${pageN - 1}`, {
+                method: "GET",
+            })
+        ).json();
+
+        players = data.data as IPlayer[];
+        pages = data.pagination.pages;
+        page = data.pagination.page;
+
+        fixShown();
+
+        return data;
+    };
+
+    onMount(() => {
+        fixShown();
+    });
 </script>
 
 <svelte:head>
@@ -179,6 +273,33 @@
                     <th>{player.aliases.join(", ")}</th>
                 </tr>
             {/each}
+
+            <!-- This fixes the issues with position:fixed; it adds space at the bottom -->
+            <br />
+            <br />
+            <br />
         </tbody>
     </table>
+
+    <div class="flex fixed bottom-4 justify-center w-full">
+        <div class="join">
+            <button class="join-item btn btn-sm" on:click={prevPage}>
+                <Icon src={ChevronLeft} size="18px" theme="solid" />
+            </button>
+
+            {#each shown as pageNum}
+                <button
+                    class="join-item btn btn-sm"
+                    class:btn-primary={pageNum - 1 === page}
+                    on:click={() => goToPage(pageNum)}
+                >
+                    {pageNum}
+                </button>
+            {/each}
+
+            <button class="join-item btn btn-sm" on:click={nextPage}>
+                <Icon src={ChevronRight} size="18px" theme="solid" />
+            </button>
+        </div>
+    </div>
 </div>

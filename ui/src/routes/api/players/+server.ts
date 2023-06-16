@@ -1,16 +1,48 @@
 import type { RequestHandler } from "@sveltejs/kit";
 import { Player } from "$lib";
 
-export const GET: RequestHandler = async () => {
-    const players = await Player.find().exec();
+export const GET: RequestHandler = async (event) => {
+    const query = event.url.searchParams;
 
-    return new Response(JSON.stringify(players, null, 4));
+    const count = parseInt(query.get("count") || "20");
+    const page = parseInt(query.get("page") || "0");
+
+    const _ = await Player.find().select("steamId").exec();
+    const num = _.length;
+
+    const players = await Player.find(
+        {},
+        {},
+        {
+            skip: page * count,
+            limit: count,
+        }
+    ).exec();
+
+    return new Response(
+        JSON.stringify(
+            {
+                data: players,
+
+                pagination: {
+                    count,
+                    page,
+                    pages: Math.ceil(num / count),
+                    total: num,
+                },
+            },
+            null,
+            4
+        )
+    );
 };
 
 export const POST: RequestHandler = async (event) => {
     const body = await event.request.json();
 
-    const existing = await Player.find().where("steamId").equals(body.steamId).exec();
+    const existing = await Player.find({
+        steamId: body.steamId,
+    }).exec();
 
     if (existing.length > 0) {
         for (const player of existing) {
