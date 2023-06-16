@@ -24,8 +24,6 @@
         "discordx": "11.7.6",
         "dotenv": "16.1.3",
         "rcon-ts": "1.2.3",
-        "simple-crypto-js": "3.0.1",
-        "yargs": "17.7.2",
         "@megaanticheat/eslint-config": "^0.1.0"
     },
     "devDependencies": {
