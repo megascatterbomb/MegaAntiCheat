@@ -1,7 +1,7 @@
 {
     "name": "megaanticheat",
     "scripts": {
-        "build-master": "rm -rf ./master/build && tsc -p ./master",
+        "build-master": "rm -rf ./master/build && pnpm -C master build",
         "build-local": "rm -rf ./local/build && pnpm -C local build",
         "build-ui": "rm -rf ./ui/build && pnpm -C ui build:node",
         "lint": "eslint . --ext .ts",
