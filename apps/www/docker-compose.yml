@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  db:
+    image: mysql:8
+    restart: always
+    environment:
+      MYSQL_DATABASE: "v"
+      MYSQL_USER: "v"
+      MYSQL_PASSWORD: "v"
+      MYSQL_ROOT_PASSWORD: "v"
+    ports:
+      - "3306:3306"
+    expose:
+      - "3306"
+    volumes:
+      - db:/var/lib/mysql
+volumes:
+  db:

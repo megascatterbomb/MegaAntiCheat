@@ -5,15 +5,12 @@
 /** @type { PrettierConfig | SortImportsConfig | TailwindConfig } */
 const config = {
     arrowParens: 'avoid',
-    printWidth: 80,
     singleQuote: true,
     jsxSingleQuote: false,
     semi: true,
     trailingComma: 'all',
     tabWidth: 4,
-    plugins: [
-        '@ianvs/prettier-plugin-sort-imports',
-    ],
+    plugins: ['@ianvs/prettier-plugin-sort-imports'],
     importOrder: [
         '^(react/(.*)$)|^(react$)|^(react-native(.*)$)',
         '^(next/(.*)$)|^(next$)',
