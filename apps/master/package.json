@@ -1,17 +1,23 @@
 {
-  "name": "@megaanticheat/master",
-  "version": "1.0.0",
-  "description": "Master cheater database with AI anti-cheat for Team Fortress 2",
-  "main": "./build/index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/megascatterbomb/MegaAntiCheat.git"
-  },
-  "author": "megascatterbomb",
-  "license": "GPL-3.0-or-later",
-  "bugs": {
-    "url": "https://github.com/megascatterbomb/MegaAntiCheat/issues"
-  },
-  "homepage": "https://github.com/megascatterbomb/MegaAntiCheat#readme"
+    "name": "@megaanticheat/master",
+    "version": "1.0.0",
+    "description": "Master cheater database with AI anti-cheat for Team Fortress 2",
+    "main": "./build/index.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/megascatterbomb/MegaAntiCheat.git"
+    },
+    "author": "megascatterbomb",
+    "license": "GPL-3.0-or-later",
+    "bugs": {
+        "url": "https://github.com/megascatterbomb/MegaAntiCheat/issues"
+    },
+    "homepage": "https://github.com/megascatterbomb/MegaAntiCheat#readme",
+    "scripts": {
+        "build": "tsup",
+        "dev": "tsup --watch"
+    },
+    "devDependencies": {
+        "tsup": "7.0.0"
+    }
 }
-
