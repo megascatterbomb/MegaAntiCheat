@@ -3,7 +3,8 @@
     "scripts": {
         "lint": "eslint . --ext .ts",
         "prettier": "prettier --write .",
-        "prettier:lint": "prettier --check ."
+        "prettier:lint": "prettier --check .",
+        "clean": "git clean -xdf .turbo node_modules"
     },
     "devDependencies": {
         "@ianvs/prettier-plugin-sort-imports": "4.0.2",
@@ -11,8 +12,7 @@
         "@types/prettier": "^2.7.3",
         "eslint": "8.42.0",
         "prettier": "2.8.8",
-        "typescript": "5.1.3",
-        "clean": "git clean -xdf .turbo node_modules"
+        "typescript": "5.1.3"
     },
     "engines": {
         "node": "v18.16.0"
