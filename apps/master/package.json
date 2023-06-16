@@ -1,11 +1,8 @@
 {
-  "name": "megaanticheat-master",
+  "name": "@megaanticheat/master",
   "version": "1.0.0",
   "description": "Master cheater database with AI anti-cheat for Team Fortress 2",
   "main": "./build/index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/megascatterbomb/MegaAntiCheat.git"
@@ -15,8 +12,6 @@
   "bugs": {
     "url": "https://github.com/megascatterbomb/MegaAntiCheat/issues"
   },
-  "homepage": "https://github.com/megascatterbomb/MegaAntiCheat#readme",
-  "dependencies": {
-    "megaanticheat": "file:.."
-  }
+  "homepage": "https://github.com/megascatterbomb/MegaAntiCheat#readme"
 }
+

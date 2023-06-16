@@ -16,27 +16,9 @@
     "plugins": [
         "@typescript-eslint"
     ],
-    "rules": {
-        "indent": [
-            "warn",
-            4
-        ],
-        "quotes": [
-            "warn",
-            "double"
-        ],
-        "semi": [
-            "warn",
-            "always"
-        ],
+    "rules": {      
         "prefer-const": [
             "warn"
         ],
-        "no-multiple-empty-lines": [
-            "warn",
-            {"max": 2, "maxBOF": 0, "maxEOF": 1}
-        ],
-        "no-unused-vars": "off",
-        "@typescript-eslint/no-unused-vars": ["off"]
     }
 }

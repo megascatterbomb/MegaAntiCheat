@@ -1,5 +1,5 @@
 {
-    "name": "megaanticheat-local",
+    "name": "@megaanticheat/local",
     "version": "1.0.0",
     "description": "Local client and cheater database for Team Fortress 2",
     "main": "./build/index.js",
@@ -23,14 +23,14 @@
         "discord.js": "14.11.0",
         "discordx": "11.7.6",
         "dotenv": "16.1.3",
-        "megaanticheat": "file:..",
         "rcon-ts": "1.2.3",
         "simple-crypto-js": "3.0.1",
         "yargs": "17.7.2",
-        "typescript": "5.1.3"
+        "@megaanticheat/eslint-config": "^0.1.0"
     },
     "devDependencies": {
         "@types/node": "20.2.5",
-        "@types/yargs": "17.0.24"
+        "@types/yargs": "17.0.24",
+        "typescript": "5.1.3"
     }
 }
