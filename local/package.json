@@ -5,8 +5,8 @@
     "main": "./build/index.js",
     "scripts": {
         "start": "ts-node src/index.ts",
-        "build": "esbuild src/index.ts --outfile=build/main.js --platform=node --target=es2022",
-        "nexe": "nexe"
+        "build": "esbuild --bundle src/index.ts --outfile=build/main.js --platform=node --target=es2022",
+        "pkg": "pkg"
     },
     "repository": {
         "type": "git",
@@ -36,7 +36,7 @@
         "@types/node": "^20.2.5",
         "@types/yargs": "^17.0.24",
         "esbuild": "^0.18.3",
-        "nexe": "4.0.0-rc.2",
+        "pkg": "^5.8.1",
         "ts-node": "^10.9.1",
         "typescript": "^5.1.3"
     }
