@@ -16,7 +16,7 @@
         "prettier:lint": "prettier --check .",
         "clean": "git clean -xdf .turbo node_modules",
         "turbo": "turbo",
-        "build": "SKIP_ENV_VALIDATION=true turbo build"
+        "build": "turbo build"
     },
     "devDependencies": {
         "@ianvs/prettier-plugin-sort-imports": "4.0.2",
@@ -24,13 +24,11 @@
         "@types/prettier": "^2.7.3",
         "eslint": "8.42.0",
         "prettier": "2.8.8",
-        "typescript": "5.1.3"
+        "typescript": "5.1.3",
+        "turbo": "^1.10.3"
     },
     "engines": {
         "node": "v18.16.0"
     },
-    "packageManager": "pnpm@8.3.1",
-    "dependencies": {
-        "turbo": "^1.10.3"
-    }
+    "packageManager": "pnpm@8.3.1"
 }

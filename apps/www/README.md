@@ -1,1 +1,0 @@
-# website for the anti cheat
