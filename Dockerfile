@@ -1,5 +1,6 @@
 FROM node:20-alpine3.18
 WORKDIR /local
+
 # Copy in needed stuff
 COPY /local/package.json .
 COPY /local/src .
@@ -15,7 +16,7 @@ RUN tsc -p ./tsconfig.json
 # Set up env files at the end so you can change these without having to recompile
 ENV LOG_PATH=/log/console.log
 ENV RCON_PWD=tf2bk
-ENV DOCKER=true
+ENV RCON_HOST=host.docker.internal
 
 # Finally, run command
 CMD [ "node", "build/index.js" ]
