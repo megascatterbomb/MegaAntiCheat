@@ -1,11 +1,11 @@
-import dotenv from "dotenv";
+import {config} from "dotenv";
 //import { startDiscordServer } from "./discord/client";
 import {startDiscordServer} from "./discord/main";
 import {runClient} from "./client/main";
 
 console.log("--- MegaAntiCheat Local Client ---");
 
-dotenv.config({path: "./local/.env"});
+config({path: "./local/.env"});
 
 export const headlessMode = process.env.HEADLESS === "true";
 export const logPath = process.env.LOG_PATH;

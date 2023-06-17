@@ -3,9 +3,9 @@ import type { Interaction, Message } from "discord.js";
 import { IntentsBitField } from "discord.js";
 import { Client } from "discordx";
 
-import dotenv from "dotenv";
+import {config} from "dotenv";
 
-dotenv.config();
+config();
 
 export const bot = new Client({
     // To use only guild command
