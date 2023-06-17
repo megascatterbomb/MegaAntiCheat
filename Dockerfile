@@ -13,7 +13,7 @@ RUN npm install --global typescript
 RUN tsc -p ./tsconfig.json 
 
 # Set up env files at the end so you can change these without having to recompile
-ENV LOG_PATH=/log
+ENV LOG_PATH=/log/console.log
 ENV RCON_PWD=tf2bk
 ENV DOCKER=true
 
