@@ -1,5 +1,6 @@
 import Rcon, { RconConfig, State } from "rcon-ts";
 import OS from "os";
+import { docker } from "..";
 
 export enum KickReason {
     None = "other",
@@ -19,8 +20,14 @@ export default class CommandManager {
 
     /** Set the settings for an rcon connection and try connect */
     public async configureRcon(port: number, password: string) {
+        let host = "127.0.0.1";
+        if (docker)
+        {
+            host = "host.docker.internal";
+        }
+
         this.options = {
-            host: "127.0.0.1",
+            host: host,
             port: port,
             password: password,
         };
