@@ -1,5 +1,15 @@
 {
     "name": "megaanticheat",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/megascatterbomb/MegaAntiCheat.git"
+    },
+    "author": "megascatterbomb",
+    "license": "GPL-3.0-or-later",
+    "bugs": {
+        "url": "https://github.com/megascatterbomb/MegaAntiCheat/issues"
+    },
+    "homepage": "https://github.com/megascatterbomb/MegaAntiCheat#readme",
     "scripts": {
         "lint": "eslint . --ext .ts",
         "prettier": "prettier --write .",

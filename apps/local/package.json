@@ -10,16 +10,6 @@
         "lint:fix": "pnpm lint --fix",
         "clean": "git clean -xdf dist .turbo node_modules"
     },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/megascatterbomb/MegaAntiCheat.git"
-    },
-    "author": "megascatterbomb",
-    "license": "GPL-3.0-or-later",
-    "bugs": {
-        "url": "https://github.com/megascatterbomb/MegaAntiCheat/issues"
-    },
-    "homepage": "https://github.com/megascatterbomb/MegaAntiCheat#readme",
     "dependencies": {
         "@discordx/importer": "1.2.2",
         "@discordx/pagination": "3.4.1",
