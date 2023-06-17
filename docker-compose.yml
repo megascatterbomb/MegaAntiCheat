@@ -1,19 +1,14 @@
-version: "3.9"
+version: '3.9'
 
 services:
-  db:
-    image: mysql:8
-    restart: always
-    environment:
-      MYSQL_DATABASE: "v"
-      MYSQL_USER: "v"
-      MYSQL_PASSWORD: "v"
-      MYSQL_ROOT_PASSWORD: "v"
-    ports:
-      - "3306:3306"
-    expose:
-      - "3306"
-    volumes:
-      - db:/var/lib/mysql
+    mongo:
+        image: mongo
+        restart: always
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: root
+            MONGO_INITDB_ROOT_PASSWORD: password
+        volumes:
+            - megabaseMongo:/data/db
+
 volumes:
-  db:
+    megabaseMongo:
