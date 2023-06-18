@@ -1,6 +1,8 @@
-## DISCLAIMER:
+## THIS PROJECT HAS MOVED:
 
-This project is still in development and is NOT released. Details provided below accurately represent our intention at the time of writing, however all these details are subject to change as the project progresses.
+This project is moving to a Git organisation: https://github.com/MegaAntiCheat
+
+Please let the devs set up their dev environments before resubmitting any issues or PRs
 
 ## Table of Contents
 
