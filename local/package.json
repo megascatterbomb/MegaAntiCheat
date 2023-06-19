@@ -4,7 +4,8 @@
   "description": "Local client and cheater database for Team Fortress 2",
   "main": "./build/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rm -rf ./build && tsc -p tsconfig.json"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.2.5",
-    "@types/yargs": "^17.0.24"
+    "@types/yargs": "^17.0.24",
+    "typescript": "^5.1.3"
   }
 }

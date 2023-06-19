@@ -2,7 +2,7 @@ import LogWatcher from "./logWatcher";
 import CommandManager from "./commandManager";
 import Server from "./server";
 import { matchStatus, matchKill, matchChat, matchLobby } from "./regexes";
-import { logPath, rconPort, rconPwd } from "..";
+import { logPath, rconHost, rconPort, rconPwd } from "..";
 
 const server = new Server();
 
@@ -50,7 +50,7 @@ export async function runClient() {
     watcher.setFilePath(logPath);
     watcher.setHandler(handleConsoleLine);
 
-    const cmd = new CommandManager(rconPort, rconPwd);
+    const cmd = new CommandManager(rconHost, rconPort, rconPwd);
     cmd.setHandler(handleCommandRespose);
 
     // eslint-disable-next-line no-constant-condition

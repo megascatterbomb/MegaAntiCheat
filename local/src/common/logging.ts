@@ -1,5 +1,5 @@
-import dotenv from "dotenv";
-dotenv.config({path: "./local/.env"});
+import {config} from "dotenv";
+config({path: "./local/.env"});
 
 export let verboseEnabled = process.env.VERBOSE === "true"; 
 

@@ -4,7 +4,9 @@
         "build-master": "rm -rf ./master/build && tsc -p ./master",
         "build-local": "rm -rf ./local/build && tsc -p ./local",
         "lint": "eslint . --ext .ts",
-        "update": "npm i --if-present && npm i --prefix local --if-present && npm i --prefix master --if-present"
+        "update-all": "npm i --if-present && npm i --prefix local --if-present && npm i --prefix master --if-present",
+        "update-local": "npm i --if-present && npm i --prefix local --if-present",
+        "update-master": "npm i --if-present && npm i --prefix master --if-present"
     },
     "devDependencies": {
         "@typescript-eslint/eslint-plugin": "^5.59.8",

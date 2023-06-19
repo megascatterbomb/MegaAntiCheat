@@ -13,14 +13,14 @@ export default class CommandManager {
     private rcon!: Rcon;
     private handler: ((response: string) => void) | undefined;
 
-    constructor(port: number, password: string) {
-        this.configureRcon(port, password);
+    constructor(host: string, port: number, password: string) {
+        this.configureRcon(host, port, password);
     }
 
     /** Set the settings for an rcon connection and try connect */
-    public async configureRcon(port: number, password: string) {
+    public async configureRcon(host: string, port: number, password: string) {
         this.options = {
-            host: "127.0.0.1",
+            host: host,
             port: port,
             password: password,
         };
