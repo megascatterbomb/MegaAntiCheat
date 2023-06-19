@@ -6,7 +6,6 @@ import https from "https";
 
 @Discord()
 export class CustomNameCommands {
-    // Custom names will be displayed where current aliases typically are so that users can be more easily identified.
     @Slash({description: "Give a Steam User a custom name.", name: "setcustomname"})
     async setcustomname(
         @SlashOption({
@@ -23,10 +22,24 @@ export class CustomNameCommands {
             required: true,
             type: ApplicationCommandOptionType.String
         })
-            interaction: CommandInteraction
+            name: string,
+        interaction: CommandInteraction
     ): Promise<void> {
-        // TODO: See if user is in database, add them as "Normal" if they're not.
+        // Check if the user exists in the database
+        // Replace `getUserFromDatabase` with actual function
+        const existingUser = await getUserFromDatabase(user);
 
-        // TODO: Apply custom name
+        if (!existingUser) {
+            // Add the user to the database with the "Normal" role
+            // Replace `addUserToDatabase` with function
+            await addUserToDatabase(user, 'Normal');
+        }
+
+        // Apply the custom name to the user
+        // Replace `applyCustomName` with function
+        await applyCustomName(user, name);
+
+        // Send a confirmation message to the interaction
+        await interaction.reply(`Custom name "${name}" has been set for user ${user}.`);
     }
 }
