@@ -33,9 +33,7 @@ export default class LogWatcher {
 
         // Watch file
         this.logFileWatcher = fs.watchFile(this.logFilePath, { interval: 100 }, (curr, prev) => {
-            if (this.logFileDescriptor == null) {
-                return;
-            }
+            if (this.logFileDescriptor == null) return;
 
             if (curr.mtime < prev.mtime) return; // File wasn't modified
 

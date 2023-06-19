@@ -33,7 +33,9 @@ export default class Player {
     }
 
     public update(player: StatusCapture) {
-        if (player.steamid !== this.steamid) throw new Error("Wrong status entry for player");
+        if (player.steamid !== this.steamid) {
+            throw new Error("Wrong status entry for player");
+        }
         this.uid = player.userid;
         this.name = player.name;
         this.time = player.time;
@@ -43,7 +45,9 @@ export default class Player {
     }
 
     public updateLobby(player: LobbyCapture) {
-        if (player.steamid !== this.steamid) throw new Error("Wrong status entry for player");
+        if (player.steamid !== this.steamid) {
+            throw new Error("Wrong status entry for player");
+        }
         this.team = player.team;
     }
 }
