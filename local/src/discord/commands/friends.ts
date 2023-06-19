@@ -12,9 +12,9 @@ export class FriendCommands {
             name: "user",
             required: true,
             type: ApplicationCommandOptionType.String,
-            transformer: SteamIDTransformer
+            transformer: SteamIDTransformer,
         })
-            user: SteamID,
+        user: SteamID,
         @SlashOption({
             description: "Page number (defaults to 1)",
             name: "page",
@@ -22,8 +22,8 @@ export class FriendCommands {
             minValue: 1,
             type: ApplicationCommandOptionType.Number,
         })
-            page: number | undefined,
-            interaction: CommandInteraction
+        page: number | undefined,
+        interaction: CommandInteraction
     ): Promise<void> {
         page ??= 1;
         // TODO: Use steam ID to get user from database.
@@ -36,6 +36,6 @@ export async function getFriendEmbed(steamID: SteamID, results: any[]): Promise<
     // TODO: Get database information.
 
     // TODO: Create embed. Perhaps come up with other ways of listing friends more efficiently; the old method is quite clunky.
-    
+
     return [];
 }

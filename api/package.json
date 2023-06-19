@@ -1,0 +1,31 @@
+{
+    "name": "megaanticheat-api",
+    "version": "1.0.0",
+    "description": "Cheater database API for Team Fortress 2",
+    "main": "./build/index.js",
+    "scripts": {
+        "build": "esbuild --bundle --minify --minify-whitespace --minify-identifiers --minify-syntax --sourcemap --platform=node --target=es2021 --outfile=build/main.js src/index.ts",
+        "dev": "ts-node dev.ts"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/megascatterbomb/MegaAntiCheat.git"
+    },
+    "author": "megascatterbomb",
+    "license": "GPL-3.0-or-later",
+    "bugs": {
+        "url": "https://github.com/megascatterbomb/MegaAntiCheat/issues"
+    },
+    "homepage": "https://github.com/megascatterbomb/MegaAntiCheat#readme",
+    "dependencies": {
+        "@fastify/websocket": "^8.1.0",
+        "colorette": "^2.0.20",
+        "fastify": "^4.18.0",
+        "megaanticheat": "workspace:..",
+        "mongoose": "^7.3.0"
+    },
+    "devDependencies": {
+        "esbuild": "^0.18.3",
+        "glob": "^10.2.7"
+    }
+}

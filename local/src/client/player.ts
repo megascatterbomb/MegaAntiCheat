@@ -25,7 +25,7 @@ export default class Player {
     constructor(player: StatusCapture) {
         this.uid = player.userid;
         this.name = player.name;
-        this.steamid = player.steamid; 
+        this.steamid = player.steamid;
         this.time = player.time;
         this.ping = player.ping;
         this.loss = player.loss;

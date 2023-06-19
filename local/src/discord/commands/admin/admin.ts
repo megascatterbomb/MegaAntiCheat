@@ -14,7 +14,7 @@ import {
 import { ButtonComponent, Discord, Guard, Slash, SlashOption } from "discordx";
 import { setVerbose, verboseEnabled } from "../../../common/logging";
 import { botOperator } from "../../guards";
-  
+
 @Discord()
 @Guard(botOperator)
 export class AdminCommands {
@@ -24,12 +24,12 @@ export class AdminCommands {
             description: "true to enable; false to disable",
             name: "boolean",
             type: ApplicationCommandOptionType.Boolean,
-            required: true
+            required: true,
         })
-            boolean: boolean,
-            interaction: CommandInteraction
+        boolean: boolean,
+        interaction: CommandInteraction
     ): Promise<void> {
-        if(verboseEnabled === boolean)  {
+        if (verboseEnabled === boolean) {
             interaction.reply(`Verbose logging is already ${boolean ? "enabled" : "disabled"}.`);
             return;
         }
@@ -38,18 +38,14 @@ export class AdminCommands {
     }
 
     @Slash({ description: "Pull latest info about all accounts in the database.", name: "refresh" })
-    async refresh(
-        interaction: CommandInteraction
-    ): Promise<void> {
+    async refresh(interaction: CommandInteraction): Promise<void> {
         const reply = await interaction.reply("Refreshing database...");
         // TODO: Refresh database
         reply.edit("Refreshed database.");
     }
 
     @Slash({ description: "Backup the database to a .JSON", name: "backup" })
-    async backup(
-        interaction: CommandInteraction
-    ): Promise<void> {
+    async backup(interaction: CommandInteraction): Promise<void> {
         const reply = await interaction.reply("Backing up database...");
         // TODO: Back up database to JSON, return to user
         // TODO: Should this be admin only?
@@ -57,21 +53,17 @@ export class AdminCommands {
     }
 
     @Slash({ description: "Restart the database", name: "restart" })
-    async restart(
-        interaction: CommandInteraction
-    ): Promise<void> {
+    async restart(interaction: CommandInteraction): Promise<void> {
         const reply = await interaction.reply("Shutting down in 5 seconds...");
-        await new Promise(resolve => setTimeout(resolve, 5000));
+        await new Promise((resolve) => setTimeout(resolve, 5000));
         await reply.edit("Shutting down...");
         process.exit(-1); // Failure status code SHOULD trigger an automatic restart.
     }
 
     @Slash({ description: "Shut down the database", name: "shutdown" })
-    async shutdown(
-        interaction: CommandInteraction
-    ): Promise<void> {
+    async shutdown(interaction: CommandInteraction): Promise<void> {
         const reply = await interaction.reply("Shutting down in 5 seconds...");
-        await new Promise(resolve => setTimeout(resolve, 5000));
+        await new Promise((resolve) => setTimeout(resolve, 5000));
         await reply.edit("Shutting down...");
         process.exit(0);
     }

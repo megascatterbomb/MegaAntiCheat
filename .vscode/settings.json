@@ -1,5 +1,6 @@
 {
-    "eslint.rules.customizations": [
-        { "rule": "*", "severity": "warn" }
-    ]
+    "eslint.rules.customizations": [{ "rule": "*", "severity": "warn" }],
+
+    // Fixes prettier issues in VS Code insiders
+    "prettier.prettierPath": "node_modules/prettier"
 }

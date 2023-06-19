@@ -10,4 +10,3 @@ export function SteamIDTransformer(
     // TODO: Custom URL support.
     return new SteamID(input);
 }
-  

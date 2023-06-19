@@ -37,7 +37,7 @@ function handleCommandRespose(line: string) {
     server.handleLobby(match);
 }
 
-const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
+const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
 export async function runClient() {
     if (logPath === undefined) {
         throw new Error("Log file path not defined. (LOG_PATH env var)");
@@ -54,7 +54,7 @@ export async function runClient() {
     cmd.setHandler(handleCommandRespose);
 
     // eslint-disable-next-line no-constant-condition
-    while(true) {
+    while (true) {
         await cmd.runStatus();
         await cmd.runLobby();
 

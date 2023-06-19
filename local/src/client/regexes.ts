@@ -1,8 +1,9 @@
 import { SteamID } from "../common/steamID";
 import { PlayerState, Team } from "./player";
 
-
-const REGEX_STATUS = new RegExp(/^#\s*(\d+)\s"(.*)"\s+(\[U:\d:\d+\])\s+(\d*:?\d\d:\d\d)\s+(\d+)\s*(\d+)\s*(active|spawning).*$/);
+const REGEX_STATUS = new RegExp(
+    /^#\s*(\d+)\s"(.*)"\s+(\[U:\d:\d+\])\s+(\d*:?\d\d:\d\d)\s+(\d+)\s*(\d+)\s*(active|spawning).*$/
+);
 export interface StatusCapture {
     userid: string;
     name: string;
@@ -27,8 +28,9 @@ export function matchStatus(line: string): StatusCapture | null {
     };
 }
 
-
-const REGEX_LOBBY = new RegExp(/^ {2}Member\[(\d+)] (\[U:\d:\d+]) {2}team = TF_GC_TEAM_(\w+) {2}type = MATCH_PLAYER\s*$/);
+const REGEX_LOBBY = new RegExp(
+    /^ {2}Member\[(\d+)] (\[U:\d:\d+]) {2}team = TF_GC_TEAM_(\w+) {2}type = MATCH_PLAYER\s*$/
+);
 export interface LobbyCapture {
     steamid: SteamID;
     team: Team;
@@ -47,7 +49,6 @@ export function matchLobby(line: string): LobbyCapture | null {
     };
 }
 
-
 const REGEX_CHAT = new RegExp(/^(?:\*DEAD\*)?(?:\(TEAM\))?\s?(.*)\s:\s\s(.*)$/);
 export interface ChatCapture {
     playerName: string;
@@ -63,7 +64,6 @@ export function matchChat(line: string): ChatCapture | null {
         message: arr[2],
     };
 }
-
 
 const REGEX_KILL = new RegExp(/^(.*)\skilled\s(.*)\swith\s(.*)\.(\s\(crit\))?$/);
 export interface KillCapture {

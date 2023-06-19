@@ -1,8 +1,16 @@
 import verboseLog from "../common/logging";
 import { SteamID } from "../common/steamID";
 import Player from "./player";
-import { ChatCapture, KillCapture, LobbyCapture, StatusCapture, matchChat, matchKill, matchLobby, matchStatus } from "./regexes";
-
+import {
+    ChatCapture,
+    KillCapture,
+    LobbyCapture,
+    StatusCapture,
+    matchChat,
+    matchKill,
+    matchLobby,
+    matchStatus,
+} from "./regexes";
 
 export default class Server {
     private players: Map<SteamID, Player>;
@@ -83,4 +91,3 @@ export default class Server {
         verboseLog("Kill: " + JSON.stringify(kill));
     }
 }
-

@@ -48,7 +48,7 @@ export default class CommandManager {
     /** Runs a command and handles the response */
     public async runCommand(command: string) {
         // Try reconnect if disconnected
-        if (!await this.forceConnect()) return;
+        if (!(await this.forceConnect())) return;
 
         // Run command
         let response: string;
@@ -67,12 +67,12 @@ export default class CommandManager {
 
     //** Runs the command to send a chat message containing the following text */
     public async sendChatMessage(message: string) {
-        return this.runCommand("say \"" + message + "\"");
+        return this.runCommand('say "' + message + '"');
     }
 
     /** Run the command to kick the player with the provided uid and reason */
     public async kickPlayer(uid: string, reason: KickReason) {
-        return this.runCommand("callvote kick \"" + uid + " " + reason + "\"");
+        return this.runCommand('callvote kick "' + uid + " " + reason + '"');
     }
 
     /** Runs the status command */
@@ -89,5 +89,4 @@ export default class CommandManager {
     public setHandler(handler: ((response: string) => void) | undefined) {
         this.handler = handler;
     }
-
 }
