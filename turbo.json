@@ -1,0 +1,23 @@
+{
+    "$schema": "https://turborepo.org/schema.json",
+    "globalDependencies": ["**/.env"],
+    "pipeline": {
+        "dev": {
+            "persistent": true,
+            "cache": false
+        },
+        "build": {},
+        "lint": {},
+        "lint:fix": {},
+        "clean": {
+            "cache": false
+        },
+        "//#clean": {
+            "cache": false
+        },
+        "type-check": {
+            "cache": false
+        }
+    },
+    "globalEnv": ["CI", "NODE_ENV", "SKIP_ENV_VALIDATION"]
+}

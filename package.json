@@ -1,14 +1,34 @@
 {
     "name": "megaanticheat",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/megascatterbomb/MegaAntiCheat.git"
+    },
+    "author": "megascatterbomb",
+    "license": "GPL-3.0-or-later",
+    "bugs": {
+        "url": "https://github.com/megascatterbomb/MegaAntiCheat/issues"
+    },
+    "homepage": "https://github.com/megascatterbomb/MegaAntiCheat#readme",
     "scripts": {
-        "build-master": "rm -rf ./master/build && tsc -p ./master",
-        "build-local": "rm -rf ./local/build && tsc -p ./local",
         "lint": "eslint . --ext .ts",
-        "update": "npm i --if-present && npm i --prefix local --if-present && npm i --prefix master --if-present"
+        "prettier": "prettier --write .",
+        "prettier:lint": "prettier --check .",
+        "clean": "git clean -xdf .turbo node_modules",
+        "turbo": "turbo",
+        "build": "turbo build"
     },
     "devDependencies": {
-        "@typescript-eslint/eslint-plugin": "^5.59.8",
-        "@typescript-eslint/parser": "^5.59.8",
-        "eslint": "^8.42.0"
-    }
+        "@ianvs/prettier-plugin-sort-imports": "4.0.2",
+        "@megaanticheat/eslint-config": "1.0.0",
+        "@types/prettier": "^2.7.3",
+        "eslint": "8.42.0",
+        "prettier": "2.8.8",
+        "typescript": "5.1.3",
+        "turbo": "^1.10.3"
+    },
+    "engines": {
+        "node": "v18.16.0"
+    },
+    "packageManager": "pnpm@8.3.1"
 }

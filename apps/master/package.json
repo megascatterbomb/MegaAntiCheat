@@ -1,0 +1,16 @@
+{
+    "name": "@megaanticheat/master",
+    "version": "1.0.0",
+    "description": "Master cheater database with AI anti-cheat for Team Fortress 2",
+    "main": "index.js",
+    "scripts": {
+        "build": "tsup",
+        "dev": "tsup --watch",
+        "lint": "eslint . --ext .ts",
+        "lint:fix": "eslint . --ext .ts --fix",
+        "clean": "git clean -xdf dist .turbo node_modules"
+    },
+    "devDependencies": {
+        "tsup": "7.0.0"
+    }
+}

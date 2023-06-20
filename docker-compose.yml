@@ -1,0 +1,14 @@
+version: '3.9'
+
+services:
+    mongo:
+        image: mongo
+        restart: always
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: root
+            MONGO_INITDB_ROOT_PASSWORD: password
+        volumes:
+            - megabaseMongo:/data/db
+
+volumes:
+    megabaseMongo:
